@@ -10,7 +10,7 @@
 <div class="h-[90px] bg-white">
     <div class="flex w-full items-center h-full justify-between px-14">
         <div class="">
-            <img src="/IMG-1715.PNG" width="100px" >
+            <img src="/IMG-1715.PNG" width="100px" alt="logo">
         </div>
         <div class="flex gap-x-8 nav-desktop">
             <a href="/">Home</a>
