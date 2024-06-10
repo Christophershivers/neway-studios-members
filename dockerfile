@@ -23,5 +23,5 @@ RUN npm i --only=production
 
 COPY --from=sk-build /usr/src/app/build /usr/src/app/build
 
-EXPOSE 3000
+EXPOSE 3005
 CMD ["node", "build/index.js"]
