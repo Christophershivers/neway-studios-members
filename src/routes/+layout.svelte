@@ -1,8 +1,13 @@
 <script lang="ts">
+    import { page } from '$app/stores';
     import "../app.css";
     import * as Avatar from "$lib/components/ui/avatar";
     import {Button} from "$lib/components/ui/button";
     import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
+
+    $: url = $page?.url?.pathname
+
+    
 </script>
 <style>
 
@@ -37,11 +42,11 @@
                         </Avatar.Root>
                     </DropdownMenu.Item>
                     <DropdownMenu.Separator />
-                    <DropdownMenu.Item><a href="/">Home</a></DropdownMenu.Item>
-                    <DropdownMenu.Item><a href="/dashboard">Dashboard</a></DropdownMenu.Item>
-                    <DropdownMenu.Item><a href="/campaigns">Campaigns</a></DropdownMenu.Item>
-                    <DropdownMenu.Item><a href="/schedule">Schedule Campaign</a></DropdownMenu.Item>
-                    <DropdownMenu.Item><a href="/support">Support</a></DropdownMenu.Item>
+                    <a href="/"><DropdownMenu.Item>Home</DropdownMenu.Item></a>
+                    <a href="/dashboard"><DropdownMenu.Item>Dashboard</DropdownMenu.Item></a>
+                    <a href="/campaigns"><DropdownMenu.Item>Campaigns</DropdownMenu.Item></a>
+                    <a href="/schedule"><DropdownMenu.Item>Schedule Campaign</DropdownMenu.Item></a>
+                    <a href="/support"><DropdownMenu.Item>Support</DropdownMenu.Item></a>
                   </DropdownMenu.Group>
                 </DropdownMenu.Content>
             </DropdownMenu.Root>
