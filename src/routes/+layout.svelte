@@ -4,15 +4,24 @@
     import * as Avatar from "$lib/components/ui/avatar";
     import {Button} from "$lib/components/ui/button";
     import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
+    //import { client, currentUser } from "$lib/components/pocketbase";
+    import { goto, replaceState } from '$app/navigation';
 
     $: url = $page?.url?.pathname
 
+    const logout = () =>{
+        //client.authStore.clear()
+        const replaceState = true
+        goto('/login', {replaceState})
+    }
+
+    //console.log($currentUser?.firstname[0])
     
 </script>
 <style>
 
 </style>
-<div class="h-[90px] bg-white">
+<div class="h-[90px] bg-white shadow-sm">
     <div class="flex w-full items-center h-full justify-between px-14">
         <div class="">
             <img src="/IMG-1715.PNG" width="100px" alt="logo">
@@ -25,10 +34,21 @@
             <a href="/support">Support</a>
         </div>
         <div class="nav-desktop">
-            <Avatar.Root>
-                <Avatar.Image src="https://github.com/shadcn.png" alt="@shadcn" />
-                <Avatar.Fallback>CN</Avatar.Fallback>
-            </Avatar.Root>
+            <DropdownMenu.Root>
+                <DropdownMenu.Trigger>
+                    <Avatar.Root>
+                        <Avatar.Image src="https://github.com/shadcn.png" alt="@shadcn" />
+                        <!--<Avatar.Fallback>{$currentUser?.firstname[0]}{$currentUser?.lastname[0]}</Avatar.Fallback>-->
+                    </Avatar.Root>
+                </DropdownMenu.Trigger>
+                <DropdownMenu.Content>
+                  <DropdownMenu.Group>
+                    <DropdownMenu.Separator />
+                    <a href="/dashboard"><DropdownMenu.Item>Account Settings</DropdownMenu.Item></a>
+                    <div on:click={logout}><DropdownMenu.Item>Logout</DropdownMenu.Item></div>
+                  </DropdownMenu.Group>
+                </DropdownMenu.Content>
+            </DropdownMenu.Root>
         </div>
         <div class="nav-mobile">
             <DropdownMenu.Root>
@@ -47,10 +67,13 @@
                     <a href="/campaigns"><DropdownMenu.Item>Campaigns</DropdownMenu.Item></a>
                     <a href="/schedule"><DropdownMenu.Item>Schedule Campaign</DropdownMenu.Item></a>
                     <a href="/support"><DropdownMenu.Item>Support</DropdownMenu.Item></a>
+                    <DropdownMenu.Separator />
+                    <a href="/dashboard"><DropdownMenu.Item>Account Settings</DropdownMenu.Item></a>
+                    <div on:click={logout}><DropdownMenu.Item>Logout</DropdownMenu.Item></div>
                   </DropdownMenu.Group>
                 </DropdownMenu.Content>
             </DropdownMenu.Root>
         </div>
     </div>
 </div>
-<slot></slot>
+<slot ></slot>

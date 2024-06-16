@@ -3,6 +3,9 @@ WORKDIR /usr/src/app
 
 ARG TZ=Europe/Stockholm
 ARG PUBLIC_HELLO
+ARG DB_URL
+
+ENV DB_URL=$DB_URL
 
 COPY . /usr/src/app
 RUN apk --no-cache add curl tzdata
