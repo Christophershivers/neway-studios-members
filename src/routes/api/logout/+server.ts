@@ -1,10 +1,8 @@
 import PocketBase from 'pocketbase';
+import {DB_URL} from '$env/static/private'
 import type { RequestEvent, RequestHandler } from "./$types";
 import { json } from "@sveltejs/kit";
 import {user} from '../../../stores/user'
-
-
-const DB_URL = process.env.DB_URL
 
 
 const client = new PocketBase(DB_URL)
@@ -12,7 +10,7 @@ const client = new PocketBase(DB_URL)
 export const POST = async (e: RequestEvent) =>{
     
 
-    console.log(DB_URL)
+    
     
     const body = await e.request.json()
     const {username, password} = body
