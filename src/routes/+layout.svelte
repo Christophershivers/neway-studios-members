@@ -4,13 +4,13 @@
     import * as Avatar from "$lib/components/ui/avatar";
     import {Button} from "$lib/components/ui/button";
     import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
-    //import { client, currentUser } from "$lib/components/pocketbase";
+    import { client, currentUser } from "$lib/pocketbase";
     import { goto, replaceState } from '$app/navigation';
 
     $: url = $page?.url?.pathname
 
     const logout = () =>{
-        //client.authStore.clear()
+        client.authStore.clear()
         const replaceState = true
         goto('/login', {replaceState})
     }
@@ -45,9 +45,9 @@
                   <DropdownMenu.Group>
                     <DropdownMenu.Separator />
                     <a href="/dashboard"><DropdownMenu.Item>Account Settings</DropdownMenu.Item></a>
-                    <form action="?/logout" method="POST">
-                        <button type="submit" class="w-full"><DropdownMenu.Item class="grid grid-col-1 justify-center">Logout</DropdownMenu.Item></button>
-                    </form>
+                    <div>
+                        <button on:click={logout} class="w-full"><DropdownMenu.Item class="">Logout</DropdownMenu.Item></button>
+                    </div>
                     
                   </DropdownMenu.Group>
                 </DropdownMenu.Content>
@@ -72,9 +72,9 @@
                     <a href="/support"><DropdownMenu.Item>Support</DropdownMenu.Item></a>
                     <DropdownMenu.Separator />
                     <a href="/dashboard"><DropdownMenu.Item>Account Settings</DropdownMenu.Item></a>
-                    <form action="?/logout" method="POST">
-                        <button type="submit" class="w-full"><DropdownMenu.Item class="grid grid-col-1 justify-center">Logout</DropdownMenu.Item></button>
-                    </form>
+                    <div >
+                        <button on:click={logout} class="w-full"><DropdownMenu.Item class="">Logout</DropdownMenu.Item></button>
+                    </div>
                     
                   </DropdownMenu.Group>
                 </DropdownMenu.Content>

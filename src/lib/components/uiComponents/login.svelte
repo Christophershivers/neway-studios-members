@@ -7,7 +7,7 @@
     import {onMount} from 'svelte'
     import {user, pb} from '../../../stores/user'
     import {client} from '$lib/pocketbase'
-  import { cookieSerialize } from "pocketbase";
+    import { cookieSerialize } from "pocketbase";
 
     let username: string
     let password: string
@@ -20,15 +20,17 @@
     })
 
     const submit = async () =>{
-        //const login = await client.collection('users').authWithPassword(username, password)
-        //const replaceState = true
-        //goto('/', {replaceState})
+        
 
         const data = {
             username,
             password
         }
-        
+
+        //const login = await client.collection('users').authWithPassword(username, password)
+        //const replaceState = true
+        //goto('/', {replaceState})
+
         /*const fet = await fetch('/api/logout', {
             method: 'POST',
             headers: {
@@ -52,9 +54,9 @@
             
         }*/
 
-        const login = await pb.collection('users').authWithPassword(username, password)
-        const replaceState = true
-        goto('/', {replaceState})
+        const login = await client.collection('users').authWithPassword(username, password)
+        //const replaceState = true
+        //goto('/', {replaceState})
 
     }
 
@@ -63,7 +65,7 @@
     }
 </script>
 
-<form action="?/login" method="POST">
+<div>
     <div class="h-[90vh] grid sm:justify-center items-center">
         <div class="flex flex-col gap-y-4 bg-white p-[30px] rounded-lg shadow-md   justify-center">
             <div class="flex justify-center"><h1 class="text-4xl font-bold ">Sign Up</h1></div>
@@ -74,7 +76,7 @@
                 </div>
                 
             </div>
-            <Button class="w-[100%]" type="submit">Signup</Button>
+            <Button class="w-[100%]" type="submit">Login</Button><Button class="w-[100%]" on:click={submit}>Login</Button>
         </div>
     </div>
-</form>
+</div>
