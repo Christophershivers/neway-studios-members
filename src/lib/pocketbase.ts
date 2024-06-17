@@ -14,8 +14,8 @@ import { writable } from 'svelte/store';
     return {client, currentUser}
 }*/
 
-const url = 'https://solid-somehow.pockethost.io/'
-export const client = new PocketBase(url)
+
+export const client = new PocketBase('DB_URL')
 
 export const currentUser = writable(client.authStore.model)
 

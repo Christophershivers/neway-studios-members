@@ -45,7 +45,10 @@
                   <DropdownMenu.Group>
                     <DropdownMenu.Separator />
                     <a href="/dashboard"><DropdownMenu.Item>Account Settings</DropdownMenu.Item></a>
-                    <div on:click={logout}><DropdownMenu.Item>Logout</DropdownMenu.Item></div>
+                    <form action="?/logout" method="POST">
+                        <button type="submit" class="w-full"><DropdownMenu.Item class="grid grid-col-1 justify-center">Logout</DropdownMenu.Item></button>
+                    </form>
+                    
                   </DropdownMenu.Group>
                 </DropdownMenu.Content>
             </DropdownMenu.Root>
@@ -69,7 +72,10 @@
                     <a href="/support"><DropdownMenu.Item>Support</DropdownMenu.Item></a>
                     <DropdownMenu.Separator />
                     <a href="/dashboard"><DropdownMenu.Item>Account Settings</DropdownMenu.Item></a>
-                    <div on:click={logout}><DropdownMenu.Item>Logout</DropdownMenu.Item></div>
+                    <form action="?/logout" method="POST">
+                        <button type="submit" class="w-full"><DropdownMenu.Item class="grid grid-col-1 justify-center">Logout</DropdownMenu.Item></button>
+                    </form>
+                    
                   </DropdownMenu.Group>
                 </DropdownMenu.Content>
             </DropdownMenu.Root>
