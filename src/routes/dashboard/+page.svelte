@@ -102,7 +102,7 @@
             <h3 class="font-bold truncate">{project.projectname}</h3>
         </div>
         <div>
-            <h3 class="font-bold">{project.cost}</h3> 
+            <h3 class="font-bold">${project.cost}</h3> 
         </div>
         <div>
             <h3 class="font-bold"><Button>Pay Deposit</Button></h3> 
