@@ -71,7 +71,7 @@
             <div class="flex justify-center"><h1 class="text-4xl font-bold ">Sign Up</h1></div>
             <div class="">
                 <div class="grid gap-2">
-                    <Input placeholder="username" name="username" bind:value={username}/>
+                    <Input placeholder="username" name="username" bind:value={username} />
                     <Input placeholder="password" name="password" bind:value={password}/>
                 </div>
                 

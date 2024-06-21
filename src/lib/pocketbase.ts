@@ -19,6 +19,8 @@ export const client = new PocketBase('https://solid-somehow.pockethost.io/')
 
 export const currentUser = writable(client.authStore.model)
 
+console.log(client.authStore.model)
+
 client.authStore.onChange((auth) =>{
     console.log('auth changed', auth)
     currentUser.set(client.authStore.model)

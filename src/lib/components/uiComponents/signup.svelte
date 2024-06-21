@@ -1,5 +1,5 @@
 <script lang="ts">
-    //import { client, currentUser } from "../pocketbase";
+    import {client} from '$lib/pocketbase'
     import { Input } from "$lib/components/ui/input/index.js";
     import {Button} from "$lib/components/ui/button";
     import { goto } from '$app/navigation';
@@ -29,7 +29,7 @@
             "lastname": lastName
         }
 
-        //const record = await client.collection('users').create(data)
+        const record = await client.collection('users').create(data)
         
         const replaceState = true
         goto('/', {replaceState})
