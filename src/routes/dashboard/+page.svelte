@@ -98,7 +98,7 @@
 <div class=" rounded-lg border  border-slate-200 py-5 px-2 bg-white sm:mx-14 mb-3">
     
     <div class="flex justify-between items-center px-3">
-        <div class=" basis-1/3 ">
+        <div class=" basis-1/3 max-w-[126px] sm:max-w-[352px]">
             <h3 class="font-bold truncate">{project.projectname}</h3>
         </div>
         <div class="basis-2/3 text-center">
