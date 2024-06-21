@@ -98,14 +98,18 @@
 <div class=" rounded-lg border  border-slate-200 py-5 px-2 bg-white sm:mx-14 mb-3">
     
     <div class="flex justify-between items-center px-3">
-        <div class="max-w-[150px] sm:max-w-[371px]">
+        <div class=" basis-1/3 ">
             <h3 class="font-bold truncate">{project.projectname}</h3>
         </div>
-        <div>
+        <div class="basis-2/3 text-center">
             <h3 class="font-bold">${project.cost}</h3> 
         </div>
-        <div>
-            <h3 class="font-bold"><Button>Pay Deposit</Button></h3> 
+        <div class="basis-1/3 text-end">
+            <h3 class="font-bold">{#if project.isdepositpaid}
+                <i class="fa-regular fa-check mr-12"></i>
+              {:else}
+                <Button>Pay Deposit</Button>
+              {/if}</h3> 
         </div>
     </div>
     
