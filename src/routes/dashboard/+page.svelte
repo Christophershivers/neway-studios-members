@@ -119,5 +119,3 @@
         </div>
     {/each}
 </div>
-
-<button on:click={counting}>click</button>

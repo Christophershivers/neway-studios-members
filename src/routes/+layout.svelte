@@ -23,9 +23,6 @@
         color: #F03A1F;
     }
 </style>
-<div>
-    current path: {url}
-</div>
 <div class="h-[90px] bg-white shadow-sm">
     <div class="flex w-full items-center h-full justify-between px-14">
         <div class="">
@@ -88,3 +85,4 @@
     </div>
 </div>
 <slot ></slot>
+
