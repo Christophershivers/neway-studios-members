@@ -6,17 +6,17 @@
     import { goto } from '$app/navigation';
     import {onMount} from 'svelte'
     import {user, pb} from '../../../stores/user'
-    import {client} from '$lib/pocketbase'
+    import {client, currentUser} from '$lib/pocketbase'
     import { cookieSerialize } from "pocketbase";
 
     let username: string
     let password: string
 
     onMount(()=>{
-        /*if($currentUser){
+        if($currentUser){
             const replaceState = true
             goto('/', {replaceState})
-        }*/
+        }
     })
 
     const submit = async () =>{
@@ -55,8 +55,8 @@
         }*/
 
         const login = await client.collection('users').authWithPassword(username, password)
-        //const replaceState = true
-        //goto('/', {replaceState})
+        const replaceState = true
+        goto('/', {replaceState})
 
     }
 
@@ -67,16 +67,22 @@
 
 <div>
     <div class="h-[90vh] grid sm:justify-center items-center">
-        <div class="flex flex-col gap-y-4 bg-white p-[30px] rounded-lg shadow-md   justify-center">
-            <div class="flex justify-center"><h1 class="text-4xl font-bold ">Sign Up</h1></div>
-            <div class="">
-                <div class="grid gap-2">
-                    <Input placeholder="username" name="username" bind:value={username} />
-                    <Input placeholder="password" name="password" bind:value={password}/>
+        <div>
+            <div class="flex flex-col gap-y-4 bg-white p-[30px] rounded-lg shadow-md   justify-center">
+                <div class="flex justify-center"><h1 class="text-4xl font-bold ">Login Up</h1></div>
+                <div class="">
+                    <div class="grid gap-2">
+                        <Input placeholder="username" name="username" bind:value={username} />
+                        <Input placeholder="password" name="password" bind:value={password}/>
+                    </div>
+                    
                 </div>
-                
+                <Button class="w-[100%]" on:click={submit}>Login</Button>
             </div>
-            <Button class="w-[100%]" type="submit">Login</Button><Button class="w-[100%]" on:click={submit}>Login</Button>
+            <div class="mt-2 flex justify-center">
+                <p >if you dont have an account you can sign up <a href="/signup" class="text-decoration-line: underline text-[#f03a1f] font-bold">here</a></p>
+            </div>
+            
         </div>
     </div>
 </div>
