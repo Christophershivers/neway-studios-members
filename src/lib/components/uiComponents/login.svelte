@@ -80,7 +80,7 @@
                 <Button class="w-[100%]" on:click={submit}>Login</Button>
             </div>
             <div class="mt-2 flex justify-center">
-                <p >if you dont have an account you can sign up <a href="/signup" class="text-decoration-line: underline text-[#f03a1f] font-bold">here</a></p>
+                <p >if you dont have an account you can sign up <a href="/signup" class="text-[#f03a1f] font-bold">here</a></p>
             </div>
             
         </div>
