@@ -6,13 +6,13 @@ export const actions = {
 
         console.log(data.amount)
 
-        const paymentIntent = locals.stripe.paymentIntents.create({
+        const paymentInten = locals.stripe.paymentIntents.create({
             amount: data.amount,
             currency: 'usd',
             payment_method_types: ['card']
         })
 
-        const {error, paymentIntent} = await locals.loadStripe.confirmCardPayment(paymentIntent.clientSecret, {
+        const {error, paymentIntent} = await locals.loadStripe.confirmCardPayment(paymentInten.clientSecret, {
             payment_method:{
                 card: card
             }
