@@ -1,6 +1,8 @@
+import { DB_URL } from '$env/static/private';
+
 export const actions = {
     pay: async ({request, locals}) =>{
-        const formData = await request.formData()
+        /*const formData = await request.formData()
 
         const data = Object.fromEntries([...formData])
 
@@ -16,6 +18,8 @@ export const actions = {
             payment_method:{
                 card: card
             }
-        })
+        })*/
+
+        console.log(DB_URL)
     }
 }
