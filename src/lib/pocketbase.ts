@@ -1,5 +1,6 @@
 import PocketBase from 'pocketbase';
 import { writable } from 'svelte/store';
+import { DB_URL } from '$env/static/private';
 
 /*export function pocket(url:any){
     const client = new PocketBase(url)
@@ -15,8 +16,7 @@ import { writable } from 'svelte/store';
 }*/
 
 
-export const client = new PocketBase('https://solid-somehow.pockethost.io/')
-
+export const client = new PocketBase(DB_URL)
 export const currentUser = writable(client.authStore.model)
 
 console.log(client.authStore.model)
