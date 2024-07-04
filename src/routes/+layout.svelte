@@ -1,27 +1,21 @@
-<script lang="ts">
+<script >
     import { page } from '$app/stores';
     import "../app.css";
     import * as Avatar from "$lib/components/ui/avatar";
     import {Button} from "$lib/components/ui/button";
     import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
-    import { client, currentUser } from "$lib/pocketbase";
     import { goto, replaceState } from '$app/navigation';
     import { onMount } from 'svelte';
 
+    export let data
     $: url = $page.url.pathname
     let isDone = true
-    const logout = () =>{
-        client.authStore.clear()
-        const replaceState = true
-        goto('/login', {replaceState})
-    }
+
     onMount( () =>{
         isDone = false
     })
-    //console.log($currentUser?.firstname[0])
-    $: isActive = (path: string) => url === path;
 
-    $: console.log(currentUser)
+    $: isActive = (path) => url === path;
 </script>
 <style>
     .active{
@@ -32,7 +26,7 @@
     <div class="h-[100vh] grid justify-center items-center"><wa-spinner style="font-size: 3rem;"></wa-spinner></div>
 {:else}
     <div class="h-[90px] bg-white shadow-sm">
-        {#if $currentUser}
+        {#if data?.profile}
             <div class="flex w-full items-center h-full justify-between px-14">
                 <div class="">
                     <img src="/IMG-1715.PNG" width="100px" alt="logo">
@@ -56,9 +50,11 @@
                         <DropdownMenu.Group>
                             <DropdownMenu.Separator />
                             <a href="/dashboard"><DropdownMenu.Item>Account Settings</DropdownMenu.Item></a>
-                            <div>
-                                <button on:click={logout} class="w-full"><DropdownMenu.Item class="">Logout</DropdownMenu.Item></button>
-                            </div>
+                            <form action="/logout" method="POST">
+                                <div>
+                                    <button class="w-full" type="submit"><DropdownMenu.Item class="">Logout</DropdownMenu.Item></button>
+                                </div>
+                            </form>
                             
                         </DropdownMenu.Group>
                         </DropdownMenu.Content>
@@ -84,9 +80,11 @@
                             <a href="/support" class:active="{isActive('/support')}"><DropdownMenu.Item>Support</DropdownMenu.Item></a>
                             <DropdownMenu.Separator />
                             <a href="/dashboard"><DropdownMenu.Item>Account Settings</DropdownMenu.Item></a>
-                            <div >
-                                <button on:click={logout} class="w-full"><DropdownMenu.Item class="">Logout</DropdownMenu.Item></button>
-                            </div>
+                            <form action="/logout" method="POST">
+                                <div >
+                                    <button class="w-full"><DropdownMenu.Item class="">Logout</DropdownMenu.Item></button>
+                                </div>
+                            </form>
                             
                         </DropdownMenu.Group>
                         </DropdownMenu.Content>

@@ -1,24 +1,17 @@
-<script lang="ts">
+<script >
     import { page } from '$app/stores';
     import { onMount } from 'svelte';
     import { client } from '$lib/pocketbase';
 
-    let id = $page.params.id;
-    console.log(id)
-    let projectStatus = '';
-
+    export let projectStatus
     const statuses = ['Pre-production', 'Production', 'Post-production', 'Review', 'Done'];
 
-    onMount(async () => {
-        const project = await client.collection('projects').getOne(id);
-        projectStatus = project.status;
-    });
-
-    function getStatusIndex(status: string) {
+    function getStatusIndex(status) {
         return statuses.indexOf(status);
     }
-</script>
 
+</script>
+{projectStatus}
 <nav aria-label="Progress" class="bg-white lg:mx-14">
     <ol role="list" class="divide-y divide-gray-300 rounded-md border border-gray-300 md:flex md:divide-y-0">
         {#each statuses as status, index}

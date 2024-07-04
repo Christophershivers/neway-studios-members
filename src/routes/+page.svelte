@@ -20,7 +20,7 @@
 </script>
 
 <div class="h-[100vh] grid justify-center items-center">
-    <h1 class="font-bold text-5xl">Welcome {$currentUser ? $currentUser.firstname : ' User!!!'}</h1>
+    <h1 class="font-bold text-5xl">Welcome {data?.profile ? data?.profile?.firstname : ' User!!!'}</h1>
 
 
     <form >

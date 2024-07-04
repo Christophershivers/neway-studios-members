@@ -1,87 +1,13 @@
 <script lang="ts">
-    import {currentUser, client} from '$lib/pocketbase'
-    import {onMount} from 'svelte'
+ import {onMount} from 'svelte'
     import {Button} from "$lib/components/ui/button";
 
     let isDone = true
-    let numberOfCampaigns = 0
-    let totalCost = 0
-    let costToString = ''
-    let openDeposits = 0
-    type project = {
-        id: string;
-        projectname: string;
-        cost: string;
-        description: string;
-        isdepositpaid: boolean;
-    };
-    
-    let projects: project[] =[
-       
-    ] 
-
-    let tests = [0, 1, 2, 3]
-    
-    let count = 0;
-    $: numbers = Array.from({ length: count }, (_, i) => i + 1);
+    export let data
     
     onMount(async () =>{
-        const userid = $currentUser?.id
-        projects = await client.collection('projects').getFullList({filter: `userid="${userid}"` })
-
-        numberOfCampaigns = projects.length
-
-        function formatMoney(object: project[]){
-
-            object.forEach(element => {
-                let value = Number(element.cost)
-                totalCost = totalCost + value
-                if(!element.isdepositpaid){
-                    openDeposits = openDeposits + 1
-                }
-                if(value >= 1000000000000){
-                    element.cost = (value/1000000000000).toFixed(2) + 'T'
-                }else if(value >= 1000000000){
-                    element.cost = (value/1000000000).toFixed(2) + 'B' 
-                }else if(value >= 1000000){
-                    element.cost = (value/1000000).toFixed(2) + 'M'
-                }else if (value >= 1000){
-                    element.cost = (value/1000).toFixed(2) + 'K'
-                }
-            });
-        }
-
-        function formatCost(object: project[]){
-
-            if(totalCost >= 1000000000000){
-                    costToString = (totalCost/1000000000000).toFixed(2) + 'T'
-                }else if(totalCost >= 1000000000){
-                    costToString = (totalCost/1000000000).toFixed(2) + 'B' 
-                }else if(totalCost >= 1000000){
-                    costToString = (totalCost/1000000).toFixed(2) + 'M'
-                }else if (totalCost >= 1000){
-                    costToString = (totalCost/1000).toFixed(2) + 'K'
-                    
-                }
-
-        }
-
-        formatMoney(projects)
-        formatCost(projects)
-        
         isDone = false
     })
-
-
-    const counting = () =>{
-        count = count + 1
-    }
-
-    
-    
-
-    
-    
 </script>
 
 
@@ -90,7 +16,7 @@
     <dl class="mx-auto grid grid-cols-1 gap-2  sm:grid-cols-2 lg:grid-cols-4 rounded-full ">
         <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 bg-white px-4 py-10 sm:px-6 xl:px-8 rounded-lg border  border-slate-200">
           <dt class="text-sm font-medium leading-6 text-gray-500">Total Campaigns</dt>
-          <dd class="w-full flex-none text-3xl font-medium leading-10 tracking-tight text-gray-900">{numberOfCampaigns}</dd>
+          <dd class="w-full flex-none text-3xl font-medium leading-10 tracking-tight text-gray-900">{data.campaigns}</dd>
         </div>
         <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 bg-white px-4 py-10 sm:px-6 xl:px-8 rounded-lg border  border-slate-200">
           <dt class="text-sm font-medium leading-6 text-gray-500">Open Campigns</dt>
@@ -98,11 +24,11 @@
         </div>
         <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 bg-white px-4 py-10 sm:px-6 xl:px-8 rounded-lg border  border-slate-200">
           <dt class="text-sm font-medium leading-6 text-gray-500">Money Spent</dt>
-          <dd class="w-full flex-none text-3xl font-medium leading-10 tracking-tight text-gray-900">${costToString}</dd>
+          <dd class="w-full flex-none text-3xl font-medium leading-10 tracking-tight text-gray-900">${data.costToString}</dd>
         </div>
         <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 bg-white px-4 py-10 sm:px-6 xl:px-8 rounded-lg border  border-slate-200">
           <dt class="text-sm font-medium leading-6 text-gray-500">Open Deposits</dt>
-          <dd class="w-full flex-none text-3xl font-medium leading-10 tracking-tight text-gray-900">{openDeposits}</dd>
+          <dd class="w-full flex-none text-3xl font-medium leading-10 tracking-tight text-gray-900">{data.openDeposits}</dd>
         </div>
       </dl>
 </div>
@@ -111,7 +37,7 @@
     <div class="h-[200px] grid justify-center items-center"><wa-spinner style="font-size: 3rem;"></wa-spinner></div>
     
 {:else}
-    {#each projects as project}
+    {#each data.projects as project}
     <a href="/dashboard/{project.id}">
         <div class=" rounded-lg border  border-slate-200 py-5 px-2 bg-white sm:mx-14 mb-3">
             <div class="flex justify-between items-center px-3">
@@ -133,10 +59,3 @@
     </a>
 {/each}
 {/if}
-<div>
-    {#each numbers as number}
-        <div>
-            <input />
-        </div>
-    {/each}
-</div>

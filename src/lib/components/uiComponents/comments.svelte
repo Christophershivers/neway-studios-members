@@ -1,31 +1,18 @@
-<script lang="ts">
+<script>
     import * as Avatar from "$lib/components/ui/avatar";
     import {client} from '$lib/pocketbase'
     import { page } from '$app/stores';
     import {onMount} from 'svelte'
 
-    $: id = $page.params.id;
+   export let projects
 
-    type project = {
-        id: string;
-        firstname: string;
-        lastname: string;
-        username: string;
-        comment: string;
-    };
     
-    let projects: project[] =[
-       
-    ] 
     onMount(async()=>{
-        projects = await client.collection('projectcomments').getFullList({filter: `field="${id}"`, expand: 'field2'})
-
-        console.log(projects)
     })
 
 </script>
 {#each projects as project}
-    <div class="flex items-start gap-4 p-4 rounded-lg transition-colors sm:mx-14 bg-white">
+    <div class="flex items-start gap-4 p-4 rounded-lg transition-colors sm:mx-14 bg-white mb-2">
         <Avatar.Avatar class="h-12 w-12 border">
         <Avatar.AvatarImage src="/placeholder-user.jpg" />
         <Avatar.AvatarFallback>CN</Avatar.AvatarFallback>

@@ -1,15 +1,14 @@
-<script lang="ts">
+<script >
     import { page } from '$app/stores';
     import {client} from '$lib/pocketbase'
     import {onMount} from 'svelte'
     import ProjectStatus from '$lib/components/uiComponents/projectstatus.svelte'
     import Comment from '$lib/components/uiComponents/comment.svelte'
     import Comments from '$lib/components/uiComponents/comments.svelte'
-    
-    $: id = $page.params.id;
+
+    export let data
 
     let isDone = true
-    let projectStatus = ''
 
     const status = {
         step1: 'Pre-production',
@@ -19,34 +18,16 @@
         step5: 'Done',
     }
 
-    type project = {
-        id: string;
-        projectname: string;
-        cost: string;
-        description: string;
-        isdepositpaid: boolean;
-        video: string;
-        preview: string;
-        status: string
-    };
-    
-    let projects: project[] =[
-       
-    ] 
-
     onMount(async() =>{
-        projects = await client.collection('projects').getOne(id)
-        projectStatus = projects.status
         isDone = false
     })
-    console.log('status:',projectStatus)
 </script>
 {#if isDone}
     <div class="h-[200px] grid justify-center items-center"><wa-spinner style="font-size: 3rem;"></wa-spinner></div>
 {:else}
-    <ProjectStatus/>
+    <ProjectStatus projectStatus={data.project.status}/>
     <div class="mt-14">
-        <h1 class="flex justify-center font-bold text-2xl">{projects.projectname}</h1>
+        <h1 class="flex justify-center font-bold text-2xl">{data.project.projectname}</h1>
         <div class="sm:mx-14">
             <iframe src="https://www.youtube.com/embed/reC_ROovHhk?si=A2EkjZ3rI_BrkW4g" title="YouTube video player" 
                 frameborder="0" 
@@ -57,6 +38,6 @@
             </iframe>
         </div>
     </div>
-    <div class="mt-7"><Comments/></div>
+    <div class="mt-7"><Comments projects={data.comments}/></div>
     <Comment/>
 {/if}
