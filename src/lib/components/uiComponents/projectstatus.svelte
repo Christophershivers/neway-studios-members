@@ -11,7 +11,6 @@
     }
 
 </script>
-{projectStatus}
 <nav aria-label="Progress" class="bg-white lg:mx-14">
     <ol role="list" class="divide-y divide-gray-300 rounded-md border border-gray-300 md:flex md:divide-y-0">
         {#each statuses as status, index}
