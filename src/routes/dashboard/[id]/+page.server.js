@@ -19,7 +19,6 @@ export const actions = {
 
     pay: async ({request, locals}) =>{
         const formData = await request.formData()
-
         const data = Object.fromEntries([...formData])
         console.log('project: ', data.projectid)
         const project = await locals.pb.collection('projects').getOne(data.projectid)
@@ -45,7 +44,7 @@ export const actions = {
                     }
                 ],
                 mode: 'payment',
-                return_url: `${request.headers.get('origin')}/return?session_id={CHECKOUT_SESSION_ID}&project_id=${data.hov}`
+                return_url: `${request.headers.get('origin')}/return?session_id={CHECKOUT_SESSION_ID}&project_id=${data.projectid}&deposit=${project.isdepositpaid}&user=${locals.user.id}`
             })
 
             
